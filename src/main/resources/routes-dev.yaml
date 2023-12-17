@@ -1,0 +1,25 @@
+spring:
+  cloud:
+    gateway:
+      mvc:
+        routesMap:
+          whoami_route:
+            uri: http://localhost:8081
+            predicates:
+              - Path=/whoami/**
+          httpbin_route:
+            uri: http://localhost:8082
+            predicates:
+              - Path=/httpbin/**
+            filters:
+              - StripPrefix=1
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      enabled: true
