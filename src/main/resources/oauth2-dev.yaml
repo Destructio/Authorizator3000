@@ -15,3 +15,14 @@ spring:
             scope:
               - user:email
               - read:user
+          keycloak:
+            provider: keycloak
+            client-id: test-client
+            client-secret: 3zqU5rA9qh6X1d8cdaYoPpbHAb9JsqLY
+            scope:
+              - openid
+              - profile
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8888/realms/test-realm
+            user-name-attribute: preferred_username

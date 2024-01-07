@@ -1,13 +1,13 @@
 package com.github.destructio.authorizator3000.model.user.oauth2.provider;
 
 import com.github.destructio.authorizator3000.enums.JpaUserProvider;
-import com.github.destructio.authorizator3000.model.user.oauth2.OAuth2UserDto;
+import com.github.destructio.authorizator3000.model.user.oauth2.JpaOAuth2User;
 
 import java.util.Map;
 
-public class GoogleUserDto extends OAuth2UserDto {
+public class GoogleUser extends JpaOAuth2User {
 
-    public GoogleUserDto(Map<String, Object> attributes) {
+    public GoogleUser(Map<String, Object> attributes) {
         super(attributes);
     }
 
