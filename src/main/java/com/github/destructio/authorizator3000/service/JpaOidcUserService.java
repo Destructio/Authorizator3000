@@ -3,10 +3,8 @@ package com.github.destructio.authorizator3000.service;
 import com.github.destructio.authorizator3000.model.Role;
 import com.github.destructio.authorizator3000.model.User;
 import com.github.destructio.authorizator3000.model.user.JpaUserDetails;
-import com.github.destructio.authorizator3000.model.user.oauth2.OAuth2UserDto;
-import com.github.destructio.authorizator3000.model.user.oauth2.OAuth2UserFactory;
-import com.github.destructio.authorizator3000.model.user.oidc.OidcUserDto;
-import com.github.destructio.authorizator3000.model.user.oidc.OidcUserFactory;
+import com.github.destructio.authorizator3000.model.user.oidc.JpaOidcUser;
+import com.github.destructio.authorizator3000.model.user.oidc.JpaOidcUserFactory;
 import com.github.destructio.authorizator3000.repository.RoleRepository;
 import com.github.destructio.authorizator3000.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -47,15 +45,15 @@ public class JpaOidcUserService implements OAuth2UserService<OidcUserRequest, Oi
                 oidcUser.getAuthorities()
         );
 
-        OidcUserDto oidcUserDto = OidcUserFactory.getOidcUser(userRequest, oidcUser);
+        JpaOidcUser jpaOidcUser = JpaOidcUserFactory.getOidcUser(userRequest, oidcUser);
 
         User user = userRepository.findByEmail(oidcUser.getEmail())
-                .orElseGet(() -> createUser(oidcUserDto));
+                .orElseGet(() -> createUser(jpaOidcUser));
 
         return new JpaUserDetails(user);
     }
 
-    private User createUser(OidcUserDto oidcUser) {
+    private User createUser(JpaOidcUser oidcUser) {
         Role role = roleRepository.findByName("USER")
                 .orElseThrow(() -> new OAuth2AuthenticationException("Default role USER is not found!"));
 

@@ -5,7 +5,7 @@ import com.github.destructio.authorizator3000.model.Role;
 import com.github.destructio.authorizator3000.model.User;
 import com.github.destructio.authorizator3000.repository.RoleRepository;
 import com.github.destructio.authorizator3000.repository.UserRepository;
-import com.github.destructio.authorizator3000.model.user.oauth2.OAuth2UserDto;
+import com.github.destructio.authorizator3000.model.user.oauth2.JpaOAuth2User;
 import com.github.destructio.authorizator3000.model.user.oauth2.OAuth2UserFactory;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -47,7 +47,7 @@ public class JpaOAuth2UserService implements OAuth2UserService<OAuth2UserRequest
                 oAuth2User.getAuthorities()
         );
 
-        OAuth2UserDto auth2User = OAuth2UserFactory.getOAuth2User(userRequest, oAuth2User);
+        JpaOAuth2User auth2User = OAuth2UserFactory.getOAuth2User(userRequest, oAuth2User);
 
         User user = userRepository.findByEmail(auth2User.getEmail())
                 .orElseGet(() -> createUser(auth2User));
@@ -56,7 +56,7 @@ public class JpaOAuth2UserService implements OAuth2UserService<OAuth2UserRequest
     }
 
     @Transactional
-    public User createUser(OAuth2UserDto auth2User) {
+    public User createUser(JpaOAuth2User auth2User) {
         Role role = roleRepository.findByName("USER")
                 .orElseThrow(() -> new OAuth2AuthenticationException("Default role USER is not found!"));
 

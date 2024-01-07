@@ -20,11 +20,6 @@ public class JpaUserDetails implements UserDetails, OAuth2User, OidcUser {
     }
 
     @Override
-    public Map<String, Object> getAttributes() {
-        return null;
-    }
-
-    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
@@ -78,6 +73,11 @@ public class JpaUserDetails implements UserDetails, OAuth2User, OidcUser {
 
     @Override
     public OidcIdToken getIdToken() {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
         return null;
     }
 }
