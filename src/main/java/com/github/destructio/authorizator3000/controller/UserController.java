@@ -1,9 +1,8 @@
-package com.github.destructio.authorizator3000.controller.api;
+package com.github.destructio.authorizator3000.controller;
 
-import com.github.destructio.authorizator3000.controller.dto.UserDto;
-import com.github.destructio.authorizator3000.model.User;
+import com.github.destructio.authorizator3000.model.dto.UserDto;
+import com.github.destructio.authorizator3000.model.entity.User;
 import com.github.destructio.authorizator3000.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,21 +10,20 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping(path = "/api/users", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
     private final UserService userService;
 
-    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public User createUser(@RequestBody UserDto userDto) {
         return userService.createUser(userDto);
     }
 
-    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/{id}")
     public User getUser(@PathVariable UUID id) {
         return userService.getUser(id);
     }
@@ -40,7 +38,7 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }

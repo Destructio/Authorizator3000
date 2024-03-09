@@ -3,7 +3,6 @@ package com.github.destructio.authorizator3000.config;
 import com.github.destructio.authorizator3000.service.JpaOAuth2UserService;
 import com.github.destructio.authorizator3000.service.JpaOidcUserService;
 import com.github.destructio.authorizator3000.service.JpaUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -25,7 +24,6 @@ public class SecurityConfig {
     private final JpaOidcUserService jpaOidcUserService;
     private final JpaUserDetailsService jpaUserDetailsService;
 
-    @Autowired
     public SecurityConfig(JpaOAuth2UserService jpaOAuth2UserService, JpaOidcUserService jpaOidcUserService, JpaUserDetailsService jpaUserDetailsService) {
         this.jpaOAuth2UserService = jpaOAuth2UserService;
         this.jpaOidcUserService = jpaOidcUserService;

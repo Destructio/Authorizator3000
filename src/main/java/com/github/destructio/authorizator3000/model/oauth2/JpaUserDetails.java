@@ -1,6 +1,7 @@
-package com.github.destructio.authorizator3000.model.user;
+package com.github.destructio.authorizator3000.model.oauth2;
 
-import com.github.destructio.authorizator3000.model.User;
+import com.github.destructio.authorizator3000.model.entity.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,12 +13,9 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import java.util.Collection;
 import java.util.Map;
 
+@RequiredArgsConstructor
 public class JpaUserDetails implements UserDetails, OAuth2User, OidcUser {
     private final User user;
-
-    public JpaUserDetails(User user) {
-        this.user = user;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

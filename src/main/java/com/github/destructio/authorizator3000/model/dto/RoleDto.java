@@ -1,4 +1,4 @@
-package com.github.destructio.authorizator3000.controller.dto;
+package com.github.destructio.authorizator3000.model.dto;
 
 import lombok.Builder;
 import lombok.Data;

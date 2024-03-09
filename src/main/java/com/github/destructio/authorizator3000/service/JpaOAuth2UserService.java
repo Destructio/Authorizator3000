@@ -1,15 +1,13 @@
 package com.github.destructio.authorizator3000.service;
 
-import com.github.destructio.authorizator3000.model.user.JpaUserDetails;
-import com.github.destructio.authorizator3000.model.Role;
-import com.github.destructio.authorizator3000.model.User;
+import com.github.destructio.authorizator3000.model.entity.Role;
+import com.github.destructio.authorizator3000.model.entity.User;
+import com.github.destructio.authorizator3000.model.oauth2.JpaOAuth2User;
+import com.github.destructio.authorizator3000.model.oauth2.JpaUserDetails;
 import com.github.destructio.authorizator3000.repository.RoleRepository;
 import com.github.destructio.authorizator3000.repository.UserRepository;
-import com.github.destructio.authorizator3000.model.user.oauth2.JpaOAuth2User;
-import com.github.destructio.authorizator3000.model.user.oauth2.OAuth2UserFactory;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -19,13 +17,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-@Service
 @Slf4j
+@Service
 public class JpaOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    @Autowired
     public JpaOAuth2UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
@@ -36,18 +33,17 @@ public class JpaOAuth2UserService implements OAuth2UserService<OAuth2UserRequest
         OAuth2User oAuth2User = new DefaultOAuth2UserService()
                 .loadUser(userRequest);
 
-        log.info(
-                """
-                User: {}
-                Attributes: {}
-                Authorities: {}
-                """,
+        log.info("""
+                        User: {}
+                        Attributes: {}
+                        Authorities: {}
+                        """,
                 oAuth2User.getName(),
                 oAuth2User.getAttributes(),
                 oAuth2User.getAuthorities()
         );
 
-        JpaOAuth2User auth2User = OAuth2UserFactory.getOAuth2User(userRequest, oAuth2User);
+        JpaOAuth2User auth2User = JpaOAuth2User.Factory.getOAuth2User(userRequest, oAuth2User);
 
         User user = userRepository.findByEmail(auth2User.getEmail())
                 .orElseGet(() -> createUser(auth2User));

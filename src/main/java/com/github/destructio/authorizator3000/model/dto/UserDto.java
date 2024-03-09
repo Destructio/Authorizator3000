@@ -1,8 +1,9 @@
-package com.github.destructio.authorizator3000.controller.dto;
+package com.github.destructio.authorizator3000.model.dto;
 
 import lombok.Builder;
 import lombok.Data;
 
+import java.net.URL;
 import java.util.Set;
 
 @Data
@@ -11,5 +12,8 @@ public class UserDto {
     private String username;
     private String password;
     private String email;
-    private Set<String> rolesId;
+    private String name;
+    private URL pictureUrl;
+
+    private Set<RoleDto> roles;
 }

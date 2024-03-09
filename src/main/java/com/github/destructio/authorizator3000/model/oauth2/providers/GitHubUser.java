@@ -1,11 +1,12 @@
-package com.github.destructio.authorizator3000.model.user.oauth2.provider;
+package com.github.destructio.authorizator3000.model.oauth2.providers;
 
 import com.github.destructio.authorizator3000.enums.JpaUserProvider;
-import com.github.destructio.authorizator3000.model.user.oauth2.JpaOAuth2User;
+import com.github.destructio.authorizator3000.model.oauth2.JpaOAuth2User;
 
 import java.util.Map;
 
 public class GitHubUser extends JpaOAuth2User {
+
     public GitHubUser(Map<String, Object> attributes) {
         super(attributes);
     }

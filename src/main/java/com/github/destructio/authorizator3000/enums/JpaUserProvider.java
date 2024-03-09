@@ -4,6 +4,6 @@ public enum JpaUserProvider {
     Auth3000,
     Google,
     GitHub,
-    Keycloak
+    OIDC
 
 }
