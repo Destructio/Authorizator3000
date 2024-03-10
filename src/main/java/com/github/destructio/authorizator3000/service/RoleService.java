@@ -32,10 +32,10 @@ public class RoleService {
                 .orElseThrow(() -> new RoleNotFoundException(id));
     }
 
-    public void updateRole(UUID id, RoleDto roleDto) {
+    public Role updateRole(UUID id, RoleDto roleDto) {
         Role role = getRole(id);
         roleMapper.update(id, roleDto);
-        roleRepository.save(role);
+        return roleRepository.save(role);
     }
 
     public void deleteRole(UUID id) {

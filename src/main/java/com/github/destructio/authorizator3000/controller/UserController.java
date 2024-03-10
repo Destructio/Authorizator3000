@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+
 @RestController
 @RequestMapping(path = "/api/users", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
@@ -19,6 +22,7 @@ public class UserController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(CREATED)
     public User createUser(@RequestBody UserDto userDto) {
         return userService.createUser(userDto);
     }
@@ -29,11 +33,12 @@ public class UserController {
     }
 
     @PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void updateUser(@PathVariable UUID id, UserDto userDto) {
-        userService.updateUser(id, userDto);
+    public User updateUser(@PathVariable UUID id, UserDto userDto) {
+        return userService.updateUser(id, userDto);
     }
 
     @DeleteMapping(path = "/{id}")
+    @ResponseStatus(NO_CONTENT)
     public void deleteUser(@PathVariable UUID id) {
         userService.deleteUser(id);
     }

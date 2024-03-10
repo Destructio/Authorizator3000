@@ -35,10 +35,10 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    public void updateUser(UUID id, UserDto userDto) {
+    public User updateUser(UUID id, UserDto userDto) {
         User user = getUser(id);
         userMapper.updateUser(userDto, user);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     public void deleteUser(UUID id) {
