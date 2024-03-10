@@ -39,17 +39,15 @@ public abstract class UserMapper {
     @Named("RolesToRolesDto")
     public Set<RoleDto> rolesToRolesId(Set<Role> roles) {
         return roles.stream()
-                .map(role -> RoleDto.builder()
-                        .name(role.getName())
-                        .build())
+                .map(role -> new RoleDto(role.getName()))
                 .collect(Collectors.toSet());
     }
 
     @Named("RolesDtoToRoles")
     public Set<Role> rolesDtoToRoles(Set<RoleDto> roles) {
         return roles.stream()
-                .map(roleDto -> roleRepository.findByName(roleDto.getName())
-                        .orElseThrow(() -> new RoleNotFoundException(roleDto.getName())))
+                .map(roleDto -> roleRepository.findByName(roleDto.name())
+                        .orElseThrow(() -> new RoleNotFoundException(roleDto.name())))
                 .collect(Collectors.toSet());
     }
 

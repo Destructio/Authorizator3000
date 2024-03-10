@@ -1,19 +1,16 @@
 package com.github.destructio.authorizator3000.model.dto;
 
 import lombok.Builder;
-import lombok.Data;
 
-import java.net.URL;
+import java.net.URI;
 import java.util.Set;
 
-@Data
 @Builder
-public class UserDto {
-    private String username;
-    private String password;
-    private String email;
-    private String name;
-    private URL pictureUrl;
-
-    private Set<RoleDto> roles;
+public record UserDto(
+        String username,
+        String password,
+        String email,
+        String name,
+        URI pictureUrl,
+        Set<RoleDto> roles) {
 }

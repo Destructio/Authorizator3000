@@ -7,7 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.io.Serializable;
-import java.net.URL;
+import java.net.URI;
 import java.util.Set;
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ public class User implements Serializable {
     @Column(unique = true)
     private String email;
     private String name;
-    private URL pictureUrl;
+    private URI pictureUrl;
     private JpaUserProvider provider;
 
     private boolean isEnabled = true;

@@ -19,9 +19,7 @@ public class AdminRoleCreatorService {
 
     @EventListener(ApplicationReadyEvent.class)
     private void adminRoleCreator() {
-        RoleDto adminRole = RoleDto.builder()
-                .name("ADMIN")
-                .build();
+        RoleDto adminRole = new RoleDto("ADMIN");
         roleService.createRole(adminRole);
         eventPublisher.publishEvent(new RoleAdminCreatedEvent(this));
     }

@@ -22,9 +22,7 @@ public class AdminUserCreatorService {
 
     @EventListener(RoleAdminCreatedEvent.class)
     private void createAdminUser() {
-        RoleDto adminRole = RoleDto.builder()
-                .name("ADMIN")
-                .build();
+        RoleDto adminRole = new RoleDto("ADMIN");
 
         String adminUser = System.getenv("AUTH3_ADMIN_USER");
         String adminPass = System.getenv("AUTH3_ADMIN_PASS");
