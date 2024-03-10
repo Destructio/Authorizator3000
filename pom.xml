@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.2</version>
+		<version>3.2.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -17,7 +17,7 @@
 	<properties>
 		<java.version>21</java.version>
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
-		<swagger-ui.version>2.2.0</swagger-ui.version>
+		<swagger-ui.version>2.3.0</swagger-ui.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
 	</properties>
 
@@ -67,6 +67,11 @@
 			<artifactId>mapstruct</artifactId>
 			<version>${mapstruct.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${swagger-ui.version}</version>
+		</dependency>
 
 <!--		Conflict with spring-boot-starter-web and spring-cloud-starter-gateway-mvc?-->
 <!--		<dependency>-->
@@ -105,11 +110,6 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>${swagger-ui.version}</version>
 		</dependency>
 	</dependencies>
 
