@@ -3,6 +3,7 @@ package com.github.destructio.authorizator3000.controller;
 import com.github.destructio.authorizator3000.model.dto.UserDto;
 import com.github.destructio.authorizator3000.model.entity.User;
 import com.github.destructio.authorizator3000.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class UserController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(CREATED)
-    public User createUser(@RequestBody UserDto userDto) {
+    public User createUser(@RequestBody @Valid UserDto userDto) {
         return userService.createUser(userDto);
     }
 
@@ -33,7 +34,7 @@ public class UserController {
     }
 
     @PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public User updateUser(@PathVariable UUID id, UserDto userDto) {
+    public User updateUser(@PathVariable UUID id, @Valid UserDto userDto) {
         return userService.updateUser(id, userDto);
     }
 

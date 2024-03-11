@@ -3,6 +3,7 @@ package com.github.destructio.authorizator3000.controller;
 import com.github.destructio.authorizator3000.model.dto.RoleDto;
 import com.github.destructio.authorizator3000.model.entity.Role;
 import com.github.destructio.authorizator3000.service.RoleService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class RoleController {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     @ResponseStatus(CREATED)
-    public Role createRole(@RequestBody RoleDto roleDto) {
+    public Role createRole(@RequestBody @Valid RoleDto roleDto) {
         return roleService.createRole(roleDto);
     }
 
@@ -33,7 +34,7 @@ public class RoleController {
     }
 
     @PatchMapping(path = "/{id}")
-    public Role updateRole(@PathVariable UUID id, RoleDto roleDto) {
+    public Role updateRole(@PathVariable UUID id, @Valid RoleDto roleDto) {
         return roleService.updateRole(id, roleDto);
     }
 

@@ -2,9 +2,14 @@ package com.github.destructio.authorizator3000.model.entity;
 
 import com.github.destructio.authorizator3000.enums.JpaUserProvider;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.validator.constraints.URL;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -19,13 +24,25 @@ public class User implements Serializable {
     @Id
     @UuidGenerator
     private UUID id;
+
     @Column(unique = true)
+    @NotBlank @Size(min = 1, max = 20)
     private String username;
+
+    @NotBlank @Size(min = 5, max = 20)
     private String password;
+
+    @Email
     @Column(unique = true)
     private String email;
+
+    @Size(min = 1, max = 50)
     private String name;
+
+    @URL
     private URI pictureUrl;
+
+    @NotNull
     private JpaUserProvider provider;
 
     private boolean isEnabled = true;
