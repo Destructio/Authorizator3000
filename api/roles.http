@@ -1,0 +1,28 @@
+### Get list of all roles
+GET http://localhost:8080/api/roles
+Accept: application/json
+
+### Get role by id
+GET http://localhost:8080/api/roles/{{id}}
+Accept: application/json
+
+### Create new role
+POST http://localhost:8080/api/roles
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "ROLE_NAME"
+}
+
+### Update role by id
+PATCH http://localhost:8080/api/roles/{{id}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "ROLE_NAME"
+}
+
+### Delete role by id
+DELETE http://localhost:8080/api/roles/{{id}}
